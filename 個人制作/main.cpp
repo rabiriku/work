@@ -1,4 +1,7 @@
 ﻿#include <Novice.h>
+/// <summary>
+/// test
+/// </summary>
 
 const char kWindowTitle[] = "GC1A_03_ウエダリクト_タイトル";
 
@@ -28,7 +31,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 		///
 		/// ↑更新処理ここまで
 		///
-		//ihih
+		
 		///
 		/// ↓描画処理ここから
 		///
