@@ -1,13 +1,14 @@
 ﻿#include <Novice.h>
 #include "Enemy.h"
 #include"player.h"
+#include"map.h"
 const char kWindowTitle[] = "GC1A_03_ウエダリクト_タイトル";
 
 // Windowsアプリでのエントリーポイント(main関数)
 int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 
 	// ライブラリの初期化
-	Novice::Initialize(kWindowTitle, 1280, 720);
+	Novice::Initialize(kWindowTitle, 1280, 800);
 
 	// キー入力結果を受け取る箱
 	char keys[256] = { 0 };
@@ -18,10 +19,11 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	Enemy enemy;
 	Enemy enemy2;
 	Player player;
-	//enemy.Initialize();
+	Map map;
+	enemy.Initialize();
 	player.Initialize();
 	enemy2.Initialize(200, 200);
-
+	map.Initialize();
 	// ウィンドウの×ボタンが押されるまでループ
 	while (Novice::ProcessMessage() == 0) {
 		// フレームの開始
@@ -34,18 +36,21 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 		///
 		/// ↓更新処理ここから
 		///
-		//enemy.Update(keys);
+		enemy.Update2();
 		player.Update(keys);
 		enemy2.Update();
+		player.Jamp(keys);
 
-		//float dx = enemy2.GetposX() - enemy.GetposX();
-		//float dy = enemy2.GetposY() - enemy.GetposY();
-		//
-		//float d = dx * dx + dy * dy;
-		//if (d < enemy.Getradius() + enemy2.Getradius()) {
-		//	enemy.Oncollision();
-		//	enemy2.Oncollision();
-		//}
+
+		float dx = enemy2.GetposX() - player.GetposX();
+		float dy = enemy2.GetposY() - player.GetposY();
+		
+		float d = dx * dx + dy * dy;
+		float dis = player.Getradius() + enemy2.Getradius();
+		if (d <= dis*dis) {
+			player.Oncollision();
+			enemy2.Oncollision();
+		}
 
 		///
 		/// ↑更新処理ここまで
@@ -55,8 +60,12 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 		/// ↓描画処理ここから
 		///
 		//enemy.Draw();
+		map.Draw();
+		enemy.Draw2();
 		enemy2.Draw();
 		player.Draw();
+	
+		Novice::ScreenPrintf(0, 40, "%f", dis*dis);
 		///
 		/// ↑描画処理ここまで
 		///
