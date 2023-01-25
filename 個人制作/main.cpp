@@ -1,6 +1,6 @@
 ﻿#include <Novice.h>
 #include "Enemy.h"
-#include"player.h"
+#include"Player.h"
 #include"map.h"
 const char kWindowTitle[] = "GC1A_03_ウエダリクト_タイトル";
 
@@ -24,6 +24,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	player.Initialize();
 	enemy2.Initialize(200, 200);
 	map.Initialize();
+
 	// ウィンドウの×ボタンが押されるまでループ
 	while (Novice::ProcessMessage() == 0) {
 		// フレームの開始
@@ -36,11 +37,18 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 		///
 		/// ↓更新処理ここから
 		///
+		map.ColBottom(player.GetleftBottomX(), player.GetleftBottomY(), player.GetrightBottomX(), player.GetrightBottomY());
+		map.ColTop(player.GetleftTopX(), player.GetleftTopY(), player.GetrightTopX(), player.GetrightTopY());
+		player.Col(map.GetmapFlag());
+		map.Updete();
 		enemy.Update2();
 		player.Update(keys);
-		enemy2.Update();
 		player.Jamp(keys);
+		player.Update();
+		enemy2.Update();
 
+		
+		
 
 		float dx = enemy2.GetposX() - player.GetposX();
 		float dy = enemy2.GetposY() - player.GetposY();
@@ -48,8 +56,12 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 		float d = dx * dx + dy * dy;
 		float dis = player.Getradius() + enemy2.Getradius();
 		if (d <= dis*dis) {
-			player.Oncollision();
+			player.Oncollision(keys);
 			enemy2.Oncollision();
+		}
+		if (d <= (dis * dis) + 400) {
+			player.Parry(keys);
+			
 		}
 
 		///

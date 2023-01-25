@@ -14,6 +14,9 @@
     <Filter Include="KamataEngine\Adapter">
       <UniqueIdentifier>{c6468eb4-788b-4a83-b207-a5f4804e56c5}</UniqueIdentifier>
     </Filter>
+    <Filter Include="KamataEngine\Hedder">
+      <UniqueIdentifier>{4bf1bc46-8e3c-4671-8ed1-28fcbc04b4ff}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="C:\KamataEngine\DirectXGame\base\DirectXCommon.cpp">
@@ -39,6 +42,9 @@
       <Filter>KamataEngine</Filter>
     </ClCompile>
     <ClCompile Include="map.cpp">
+      <Filter>KamataEngine</Filter>
+    </ClCompile>
+    <ClCompile Include="bullet.cpp">
       <Filter>KamataEngine</Filter>
     </ClCompile>
   </ItemGroup>
@@ -121,10 +127,17 @@
     <ClInclude Include="..\DirectXGame\math\Vector4.h">
       <Filter>KamataEngine\Include</Filter>
     </ClInclude>
-    <ClInclude Include="Player.h" />
-    <ClInclude Include="Enemy.h">
-      <Filter>KamataEngine\Source</Filter>
+    <ClInclude Include="bullet.h">
+      <Filter>KamataEngine\Hedder</Filter>
     </ClInclude>
-    <ClInclude Include="map.h" />
+    <ClInclude Include="map.h">
+      <Filter>KamataEngine\Hedder</Filter>
+    </ClInclude>
+    <ClInclude Include="Player.h">
+      <Filter>KamataEngine\Hedder</Filter>
+    </ClInclude>
+    <ClInclude Include="Enemy.h">
+      <Filter>KamataEngine\Hedder</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

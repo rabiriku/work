@@ -9,11 +9,12 @@ void Enemy::Initialize()
 	speedX_ = 5;
 	speedY_ = 5;
 	color_ = WHITE;
-	shakeflag_ = 0;
-	shaketime_ = 60;
-	reshaketime = 500;
-	atacckposX_ = 1300;
-	atacckposY_ = 300;
+	shakeFlag_ = 0;
+	shakeTime_ = 60;
+	reshakeTime = 500;
+	atacckPosX_ = 1300;
+	atacckPosY_ = 300;
+
 }
 
 void Enemy::Initialize(int x, int y)
@@ -30,6 +31,7 @@ void Enemy::Initialize(int x, int y)
 
 void Enemy::Update()
 {
+
 	posX_ += speedX_;
 	posY_ += speedY_;
 	if (posX_ - radius_ == 0 || posX_ + radius_ >= 1248) {
@@ -42,60 +44,141 @@ void Enemy::Update()
 
 void Enemy::Update2()
 {
-	if (shakeflag_ == 0) {
-		if (shaketime_ > 0) {
-			shaketime_ -= 1;
+	if (shakeFlag_ == 0) {
+		if (shakeTime_ > 0) {
+			shakeTime_ -= 1;
 		}
-		if (shaketime_ > 40) {
+		if (shakeTime_ > 40) {
 			randX_ = rand() % 16 - 8;
 			randY_ = rand() % 16 - 8;
 		}
-		if (shaketime_ < 40 && shaketime_ > 20) {
+		if (shakeTime_ < 40 && shakeTime_ > 20) {
 			randX_ = rand() % 11 - 5;
 			randY_ = rand() % 11 - 5;
 		}
-		if ( shaketime_ < 20 && shaketime_ > 0) {
+		if ( shakeTime_ < 20 && shakeTime_ > 0) {
 			randX_ = rand() % 7 - 3;
 			randY_ = rand() % 7 - 3;
 		}
-		if (shaketime_ == 0) {
-			shakeflag_ = rand()%3;
-			shaketime_ = 60;
+		if (shakeTime_ == 0) {
+			shakeFlag_ = rand() % 3;
+			shakeTime_ = 60;
 			
 		}
 
 	}
-	if (shakeflag_ == 1) {
+	if (shakeFlag_ == 1) {
 		posX_ += speedX_;
 		posY_ += speedY_;
-		reshaketime -= 1;
+		reshakeTime -= 1;
 		if (posX_ - radius_ == 0 || posX_ + radius_ >= 1248) {
 			speedX_ *= -1;
 		}
 		if (posY_ - radius_ <= 32 || posY_ + radius_ >= 768) {
 			speedY_ *= -1;
-			if (reshaketime < 0) {
-				shakeflag_ = 0;
-				reshaketime = 500;
+			if (reshakeTime < 0) {
+				shakeFlag_ = 0;
+				reshakeTime = 500;
 		}
 
 		}
 	}
 
-	if (shakeflag_ == 2) {
-		atacckposX_ -= speedX_;
-		if (atacckposX_ < -1280) {
-			shakeflag_ = 0;
-			atacckposX_ = 1300;
+	if (shakeFlag_ == 2) {
+		atacckPosX_ -= speedX_;
+		if (atacckPosX_ < -1280) {
+			shakeFlag_ = 0;
+			atacckPosX_ = 1300;
 		}
 	}
 
-	if (shakeflag_ == 3) {
+	//const int kEmitterMax = 300;
 
-	}
+
+	//struct Vector2 {
+	//	int X;
+	//	int Y;
+	//};
+	//
+	//struct Circle {
+	//	Vector2 Pos[kEmitterMax];
+	//	Vector2 Speed[kEmitterMax];
+	//	int flag[kEmitterMax];
+	//};
+	//
+	//struct Mouse {
+	//	Vector2 Pos;
+	//};
+	//
+	//struct Scale {
+	//	Vector2 Pos;
+	//	Vector2 Max;
+	//	Vector2 Min;
+	//};
+	//
+	//Circle ball = { 0 };
+	//for (int i = 0; i < kEmitterMax; i++) {
+	//	ball.Pos[i].X = 0;
+	//	ball.Pos[i].Y = 0;
+	//	ball.Speed[i].Y = 0;
+	//	ball.flag[i] = 0;
+	//}
+	//
+	//Scale scale = { 0 };
+	//scale.Pos.X = 100;
+	//scale.Pos.Y = 100;
+	//scale.Max.X = 50;
+	//scale.Max.Y = 20;
+	//scale.Min.X = 25;
+	//scale.Min.Y = 10;
+
+	//if (shakeflag_ == 3) {
+	//
+	//
+	//	for (int i = 0; i < kEmitterMax; i++) {
+	//		if (ball.flag[i] == 0) {
+	//			ball.flag[i] = 1;
+	//			ball.Pos[i].X = scale.Pos.X + scale.Max.X / 2;
+	//			ball.Pos[i].Y = scale.Pos.Y;
+	//			ball.Pos[i].X += rand() % scale.Max.X - scale.Min.X;
+	//			ball.Pos[i].Y += rand() % scale.Max.Y;
+	//			ball.Speed[i].Y = 0;
+	//			break;
+	//		}
+	//	}
+	//
+	//	for (int i = 0; i < kEmitterMax; i++) {
+	//		if (ball.flag[i] == 1) {
+	//
+	//			
+	//			
+	//			
+	//			
+	//			ball.Pos[i].Y += ball.Speed[i].Y;
+	//			ball.Speed[i].Y++;
+	//		}
+	//		if (ball.Pos[i].Y >= 720) {
+	//			ball.flag[i] = 0;
+	//		}
+	//	}
+	//	for (int i = 0; i < kEmitterMax; i++) {
+	//		if (ball.flag[i]) {
+	//			Novice::DrawEllipse(ball.Pos[i].X, ball.Pos[i].Y, 10, 10, 0.0f, BLACK, //kFillModeSolid);
+	//		}
+	//	}
+	//}
+	//
+	//if (shakeflag_ == 4) {
+	//
+	//}
 }
 
-
+//void Enemy::Parry(char*keys) {
+//	if (keys[DIK_E]) {
+//		
+//	}
+//
+//}
 
 //void Enemy::Update(char* keys)
 //{
@@ -122,13 +205,13 @@ void Enemy::Draw()
 
 void Enemy::Draw2() {
 	Novice::DrawEllipse(posX_ + randX_, posY_ + randY_, radius_, radius_, 0, WHITE,kFillModeSolid);
-	Novice::DrawBox(atacckposX_, atacckposY_, 1280, 150, 0, RED, kFillModeSolid);
-	Novice::ScreenPrintf(0, 60, "%d", shakeflag_);
+	Novice::DrawBox(atacckPosX_, atacckPosY_, 1280, 150, 0, RED, kFillModeSolid);
+
+	Novice::ScreenPrintf(0, 60, "%d", shakeFlag_);
 }
 void Enemy::Oncollision()
 {
-	speedX_ *= -1;
-	color_ = BLACK;
+		color_ = BLACK;
 }
 
 void Enemy::Nocollision()

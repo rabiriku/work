@@ -1,5 +1,10 @@
 #pragma once
 //#include"bullet.h"
+#include"Player.h"
+
+/// <summary>
+/// 敵
+/// </summary>
 class Enemy {
 public:
 	void Initialize();
@@ -19,11 +24,14 @@ public:
 	void Oncollision();
 
 	void Nocollision();
+
+	void Parry(char*keys);
 	//アクセッサ
 	int GetposX() { return posX_; }
 	int GetposY() { return posY_; }
 	int Getradius() { return radius_; }
 
+	Player player_;
 
 private:
 	int posX_;
@@ -34,11 +42,16 @@ private:
 	int speedX_;
 	int speedY_;
 
-	int shaketime_;
-	int reshaketime;
+	int shakeTime_;
+	int reshakeTime;
 	int randX_ = 0;
 	int randY_ = 0;
-	int shakeflag_;
-	int atacckposX_;
-	int atacckposY_;
+	int shakeFlag_;
+	int atacckPosX_;
+	int atacckPosY_;
+
+	struct Vector2 {
+		float x;
+		float y;
+	};
 };

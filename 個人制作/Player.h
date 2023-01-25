@@ -1,36 +1,68 @@
 #pragma once
-#include"map.h"
-#include<Novice.h>
+
+/// <summary>
+/// プレイヤー
+/// </summary>
 class Player {
 public:
+	
+	/// <summary>
+	/// 初期化
+	/// </summary>
 	void Initialize();
-
+	/// <summary>
+	/// 左右移動
+	/// </summary>
+	/// <param name="keys"></param>
 	void Update(char* keys);
-
-	void Plly(char* keys);
-
+	void Update();
+	/// <summary>
+	/// パリィ
+	/// </summary>
+	/// <param name="keys"></param>
+	void Parry(char* keys);
+	/// <summary>
+	/// 上下の壁に移動する
+	/// </summary>
+	/// <param name="keys"></param>
 	void Jamp(char* keys);
-
+	/// <summary>
+	/// 描画
+	/// </summary>
 	void Draw();
-
+	/// <summary>
+	/// map引数受け取り
+	/// </summary>
+	/// <param name="mapflag"></param>
+	void Col(int x);
+	
 	int GetposX() { return posX_; }
 	int GetposY() { return posY_; }
 	int Getradius() { return radius_; }
+	int GetparryFlaf() { return parryFlag_; }
 
-	void Oncollision();
-	Map map_;
-	
-private:
+	int GetrightTopX() { return rightTopX_; }
+	int GetrightTopY() { return rightTopY_; }
+	int GetrightBottomX() { return rightBottomX_; }
+	int GetrightBottomY() { return rightBottomY_; }
+	int GetleftTopX() { return leftTopX_; }
+	int GetleftTopY() { return leftTopY_; }
+	int GetleftBottomX() { return leftBottomX_; }
+	int GetleftBottomY() { return leftBottomY_; }
+	int GetsppedX() { return speedX_; }
+
+	void Oncollision(char*keys);
+	private:	
 	int posX_;
 	int posY_;
-	int rightTopX;
-	int rightTopY;
-	int rightBottomX;
-	int rightBottomY;
-	int leftTopY;
-	int leftTopX;
-	int leftBottomX;
-	int leftBottomY;
+	int rightTopX_;
+	int rightTopY_;
+	int rightBottomX_;
+	int rightBottomY_;
+	int leftTopY_;
+	int leftTopX_;
+	int leftBottomX_;
+	int leftBottomY_;
 
 	int radius_;
 	unsigned int color_;
@@ -38,16 +70,23 @@ private:
 	int speedY_;
 	int speedtmp_;
 
-	int jampspeed_;
-	int jampflag_;
+	int jampSpeed_;
+	int jampFlag_;
 
-	int effectflag;
+	int parryFlag_;
+	int invincibleTime_;
 
-	int playerright=Novice::LoadTexture("./player2.png");
-	int playerdownright = Novice::LoadTexture("./player.png");
-	int  playerjamp1 = Novice::LoadTexture("./player4.png");
-	int  playerjamp2 = Novice::LoadTexture("./player5.png");
+	int effectFlag_;
+	int effectTime_;
+
+	int playerHp_;
 
 
+	int playerright;
+	int playerdownright;
+	int  playerjamp1;
+	int  playerjamp2;
 
+	int mapflag_;
+	int map1_;
 };
