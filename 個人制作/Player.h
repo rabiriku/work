@@ -1,11 +1,23 @@
 #pragma once
 
+struct Vector2 {
+	int x;
+	int y;
+};
+
+struct Vertex {
+	Vector2 leftTop;
+	Vector2 leftBottom;
+	Vector2 rightTop;
+	Vector2 rightBottom;
+};
+
 /// <summary>
 /// プレイヤー
 /// </summary>
 class Player {
 public:
-	
+
 	/// <summary>
 	/// 初期化
 	/// </summary>
@@ -15,7 +27,11 @@ public:
 	/// </summary>
 	/// <param name="keys"></param>
 	void Update(char* keys);
-	void Update();
+	/// <summary>
+	/// player当たり判定
+	/// </summary>
+	void VertexUpdate();
+
 	/// <summary>
 	/// パリィ
 	/// </summary>
@@ -35,43 +51,42 @@ public:
 	/// </summary>
 	/// <param name="mapflag"></param>
 	void Col(int x);
-	
-	int GetposX() { return posX_; }
-	int GetposY() { return posY_; }
+
+	//player詳細
+	Vector2 GetPosition() { return pos_; }
 	int Getradius() { return radius_; }
 	int GetparryFlaf() { return parryFlag_; }
 
-	int GetrightTopX() { return rightTopX_; }
-	int GetrightTopY() { return rightTopY_; }
-	int GetrightBottomX() { return rightBottomX_; }
-	int GetrightBottomY() { return rightBottomY_; }
-	int GetleftTopX() { return leftTopX_; }
-	int GetleftTopY() { return leftTopY_; }
-	int GetleftBottomX() { return leftBottomX_; }
-	int GetleftBottomY() { return leftBottomY_; }
-	int GetsppedX() { return speedX_; }
+	//当たり判定取得
+	Vertex GetSideVertex() { return sideVertex_; }
+	Vertex GetHightVertex() { return hightVertex_; }
 
-	void Oncollision(char*keys);
-	private:	
-	int posX_;
-	int posY_;
-	int rightTopX_;
-	int rightTopY_;
-	int rightBottomX_;
-	int rightBottomY_;
-	int leftTopY_;
-	int leftTopX_;
-	int leftBottomX_;
-	int leftBottomY_;
+	//当たったら引き戻し
+	void SetHightpos(int Blocksize);
+	void SetUnderPos(int Blocksize);
+	void SetLeftPos(int Blocksize);
+	void SetRightPos(int Blocksize);
+	void Fall();
+
+	//当たったら
+	void Oncollision(char* keys);
+private:
+
+
+	Vector2 pos_;
+	Vertex sideVertex_;
+	Vertex hightVertex_;
+	Vector2 speed_;
+
 
 	int radius_;
 	unsigned int color_;
-	int speedX_;
-	int speedY_;
+
 	int speedtmp_;
 
-	int jampSpeed_;
-	int jampFlag_;
+	const int kJumpPower = 15;
+	int jumpSpeed_;
+	int isJump_;
 
 	int parryFlag_;
 	int invincibleTime_;
@@ -81,12 +96,13 @@ public:
 
 	int playerHp_;
 
+	int mapflag_;
+	int map1_;
 
+	// テクスチャ
 	int playerright;
 	int playerdownright;
 	int  playerjamp1;
 	int  playerjamp2;
 
-	int mapflag_;
-	int map1_;
 };

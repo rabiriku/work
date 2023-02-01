@@ -37,21 +37,41 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 		///
 		/// ↓更新処理ここから
 		///
-		map.ColBottom(player.GetleftBottomX(), player.GetleftBottomY(), player.GetrightBottomX(), player.GetrightBottomY());
-		map.ColTop(player.GetleftTopX(), player.GetleftTopY(), player.GetrightTopX(), player.GetrightTopY());
-		player.Col(map.GetmapFlag());
-		map.Updete();
-		enemy.Update2();
+		//player.Col(map.GetmapFlag());
+		
+		//enemy.Update2();
 		player.Update(keys);
-		player.Jamp(keys);
-		player.Update();
+
+		//player.Update();
 		enemy2.Update();
 
-		
+		//map.Colplayer(player.GetPosition(), player.Getradius());
+		//map.ColBottom(player.GetVertex());
+		//map.ColTop(player.GetVertex());
 		
 
-		float dx = enemy2.GetposX() - player.GetposX();
-		float dy = enemy2.GetposY() - player.GetposY();
+		// 当たっていたら1 当たってなかったら0
+		if (map.BlockBottomCollison(player.GetHightVertex())) {
+			player.SetUnderPos(map.GetBlockSize());
+		}
+		else {
+			player.Fall();
+		}
+		
+		if (map.BlockLeftCollision(player.GetSideVertex())) {
+			player.SetLeftPos(map.GetBlockSize());
+		}
+
+		if (map.BlockRightCollision(player.GetSideVertex())) {
+			player.SetRightPos(map.GetBlockSize());
+		}
+		if (map.BlockTopCollision(player.GetHightVertex())) {
+			player.SetHightpos(map.GetBlockSize());
+		}
+
+
+		float dx = enemy2.GetPosition().x - player.GetPosition().x;
+		float dy = enemy2.GetPosition().y - player.GetPosition().y;
 		
 		float d = dx * dx + dy * dy;
 		float dis = player.Getradius() + enemy2.Getradius();
@@ -73,11 +93,11 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 		///
 		//enemy.Draw();
 		map.Draw();
-		enemy.Draw2();
+		//enemy.Draw2();
 		enemy2.Draw();
 		player.Draw();
 	
-		Novice::ScreenPrintf(0, 40, "%f", dis*dis);
+		//Novice::ScreenPrintf(0, 40, "%f", dis*dis);
 		///
 		/// ↑描画処理ここまで
 		///

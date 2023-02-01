@@ -3,8 +3,8 @@
 
 void Enemy::Initialize()
 {
-	posX_ = 200;
-	posY_ = 200;
+	pos_.x = 200;
+	pos_.y = 200;
 	radius_ = 10;
 	speedX_ = 5;
 	speedY_ = 5;
@@ -19,8 +19,8 @@ void Enemy::Initialize()
 
 void Enemy::Initialize(int x, int y)
 {
-	posX_ = x;
-	posY_ = y;
+	pos_.x = x;
+	pos_.y = y;
 	radius_ = 10;
 	speedX_ = 0;
 	speedY_ = 5;
@@ -31,13 +31,13 @@ void Enemy::Initialize(int x, int y)
 
 void Enemy::Update()
 {
-
-	posX_ += speedX_;
-	posY_ += speedY_;
-	if (posX_ - radius_ == 0 || posX_ + radius_ >= 1248) {
+	
+	pos_.x += speedX_;
+	pos_.y += speedY_;
+	if (pos_.x- radius_ == 0 || pos_.x + radius_ >= 1248) {
 		speedX_ *= -1;
 	}
-	if (posY_ - radius_ <= 32 || posY_ + radius_ >= 768){
+	if (pos_.y - radius_ <= 32 || pos_.y + radius_ >= 768){
 		speedY_ *= -1;
 	}
 }
@@ -68,13 +68,13 @@ void Enemy::Update2()
 
 	}
 	if (shakeFlag_ == 1) {
-		posX_ += speedX_;
-		posY_ += speedY_;
+		pos_.x += speedX_;
+		pos_.y += speedY_;
 		reshakeTime -= 1;
-		if (posX_ - radius_ == 0 || posX_ + radius_ >= 1248) {
+		if (pos_.x - radius_ == 0 || pos_.y+ radius_ >= 1248) {
 			speedX_ *= -1;
 		}
-		if (posY_ - radius_ <= 32 || posY_ + radius_ >= 768) {
+		if (pos_.y - radius_ <= 32 || pos_.y + radius_ >= 768) {
 			speedY_ *= -1;
 			if (reshakeTime < 0) {
 				shakeFlag_ = 0;
@@ -200,14 +200,14 @@ void Enemy::Update2()
 //}
 void Enemy::Draw()
 {
-	Novice::DrawEllipse(posX_, posY_, radius_, radius_, 0.0f, color_, kFillModeSolid);
+	Novice::DrawEllipse(pos_.x, pos_.y, radius_, radius_, 0.0f, color_, kFillModeSolid);
 }
 
 void Enemy::Draw2() {
-	Novice::DrawEllipse(posX_ + randX_, posY_ + randY_, radius_, radius_, 0, WHITE,kFillModeSolid);
+	Novice::DrawEllipse(pos_.x + randX_, pos_.y + randY_, radius_, radius_, 0, WHITE,kFillModeSolid);
 	Novice::DrawBox(atacckPosX_, atacckPosY_, 1280, 150, 0, RED, kFillModeSolid);
 
-	Novice::ScreenPrintf(0, 60, "%d", shakeFlag_);
+	//Novice::ScreenPrintf(0, 60, "%d", shakeFlag_);
 }
 void Enemy::Oncollision()
 {

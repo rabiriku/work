@@ -1,5 +1,4 @@
 #pragma once
-//#include"bullet.h"
 #include"Player.h"
 
 /// <summary>
@@ -27,15 +26,14 @@ public:
 
 	void Parry(char*keys);
 	//アクセッサ
-	int GetposX() { return posX_; }
-	int GetposY() { return posY_; }
+	Vector2 GetPosition() { return pos_; }
 	int Getradius() { return radius_; }
 
-	Player player_;
-
+	
 private:
-	int posX_;
-	int posY_;
+	
+	Vector2 pos_;
+
 
 	int radius_;
 	unsigned int color_;
@@ -50,8 +48,5 @@ private:
 	int atacckPosX_;
 	int atacckPosY_;
 
-	struct Vector2 {
-		float x;
-		float y;
-	};
+	
 };
