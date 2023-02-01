@@ -7,7 +7,8 @@ void Map::Initialize() {
 	mapCountY = sizeof(map1) / sizeof(map1[0]);
 	blockSize = 32;
 	mapFlag_ = 0;
-	bg = Novice::LoadTexture("./haikei.png");
+	bg = Novice::LoadTexture("./resouces/bg.png");
+	bgbox = Novice::LoadTexture("./resouces/passbox.png");
 }
 
 void Map::ColBottom(const Vertex& vertex)
@@ -99,10 +100,78 @@ int Map::BlockRightCollision(Vertex vertex)
 	return 0;
 }
 
+int Map::GoalTopCollision(Vertex vertex)
+{
+	if (vertex.leftTop.x >= mapCountX || vertex.leftTop.x < 0 ||
+		vertex.leftTop.y >= mapCountY || vertex.leftTop.y < 0 ||
+		vertex.rightTop.x >= mapCountX || vertex.rightTop.x < 0 ||
+		vertex.rightTop.y >= mapCountY || vertex.rightTop.y < 0) {
+		return 0;
+	}
+
+	if (map1[vertex.leftTop.y][vertex.leftTop.x] == GOAL ||
+		map1[vertex.rightTop.y][vertex.rightTop.x] == GOAL) {
+		return 1;
+	}
+	return 0;
+}
+
+int Map::GoalBottomCollision(Vertex vertex)
+{
+	if (vertex.leftBottom.x >= mapCountX || vertex.leftBottom.x < 0 ||
+		vertex.leftBottom.y >= mapCountY || vertex.leftBottom.y < 0 ||
+		vertex.rightBottom.x >= mapCountX || vertex.rightBottom.x < 0 ||
+		vertex.rightBottom.y >= mapCountY || vertex.rightBottom.y < 0) {
+		return 0;
+	}
+
+	if (map1[vertex.leftBottom.y][vertex.leftBottom.x] == GOAL ||
+		map1[vertex.rightBottom.y][vertex.rightBottom.x] == GOAL) {
+		return 1;
+	}
+	return 0;
+}
+
+int Map::GoalLeftCollision(Vertex vertex)
+{
+	if (vertex.leftTop.x >= mapCountX || vertex.leftTop.x < 0 ||
+		vertex.leftTop.y >= mapCountY || vertex.leftTop.y < 0 ||
+		vertex.leftBottom.x >= mapCountX || vertex.leftBottom.x < 0 ||
+		vertex.leftBottom.y >= mapCountY || vertex.leftBottom.y < 0) {
+		return 0;
+	}
+
+
+	if (map1[vertex.leftTop.y][vertex.leftTop.x] == GOAL ||
+		map1[vertex.leftBottom.y][vertex.leftBottom.x] == GOAL) {
+		return 1;
+	}
+
+	return 0;
+}
+
+int Map::GoalRightCollision(Vertex vertex)
+{
+	if (vertex.rightTop.x >= mapCountX || vertex.rightTop.x < 0 ||
+		vertex.rightTop.y >= mapCountY || vertex.rightTop.y < 0 ||
+		vertex.rightBottom.x >= mapCountX || vertex.rightBottom.x < 0 ||
+		vertex.rightBottom.y >= mapCountY || vertex.rightBottom.y < 0) {
+		return 0;
+	}
+
+	if (map1[vertex.rightTop.y][vertex.rightTop.x] == GOAL ||
+		map1[vertex.rightBottom.y][vertex.rightBottom.x] == GOAL) {
+		return 1;
+	}
+
+	return 0;
+}
+
 
 void Map::Draw() {
 
 	Novice::DrawSprite(0, 0, bg, 1, 1, 0, WHITE);
+	Novice::DrawSprite(0, 0, bgbox, 1, 1, 0, 0xffffff20);
 	Novice::ScreenPrintf(0, 240, "leftbottom%d", leftBottomX_);
 	Novice::ScreenPrintf(0, 300, "%d", mapFlag_);
 	for (int y = 0; y < mapCountY; y++) {

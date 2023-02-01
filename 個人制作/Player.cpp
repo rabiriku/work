@@ -22,10 +22,10 @@ void Player::Initialize()
 	invincibleTime_ = 180;
 
 
-	playerright = Novice::LoadTexture("./player2.png");
-	playerdownright = Novice::LoadTexture("./player.png");
-	playerjamp1 = Novice::LoadTexture("./player4.png");
-	playerjamp2 = Novice::LoadTexture("./player5.png");
+	playerright = Novice::LoadTexture("./resouces/player2.png");
+	playerdownright = Novice::LoadTexture("./resouces/player.png");
+	playerjamp1 = Novice::LoadTexture("./resouces/player4.png");
+	playerjamp2 = Novice::LoadTexture("./resouces/player5.png");
 
 }
 
@@ -51,14 +51,14 @@ void Player::VertexUpdate()
 	sideVertex_.leftBottom.x = (pos_.x - radius_) / 32;
 	sideVertex_.leftBottom.y = (pos_.y + radius_ - 3) / 32;
 
-	hightVertex_.rightTop.x = (pos_.x + radius_ - 6) / 32;
+	hightVertex_.rightTop.x = (pos_.x + radius_ - 7) / 32;
 	hightVertex_.rightTop.y = (pos_.y - radius_) / 32;
-	hightVertex_.rightBottom.x = (pos_.x + radius_ - 6) / 32;
+	hightVertex_.rightBottom.x = (pos_.x + radius_ - 7) / 32;
 	hightVertex_.rightBottom.y = (pos_.y + radius_) / 32;
 
-	hightVertex_.leftTop.x = (pos_.x - radius_ + 5) / 32;
+	hightVertex_.leftTop.x = (pos_.x - radius_ + 6) / 32;
 	hightVertex_.leftTop.y = (pos_.y - radius_) / 32;
-	hightVertex_.leftBottom.x = (pos_.x - radius_ + 5) / 32;
+	hightVertex_.leftBottom.x = (pos_.x - radius_ + 6) / 32;
 	hightVertex_.leftBottom.y = (pos_.y + radius_) / 32;
 }
 
@@ -119,14 +119,16 @@ void Player::Draw()
 	}
 #ifdef _DEBUG
 	Novice::DrawEllipse(pos_.x, pos_.y, radius_, radius_, 0.0f, color_, kFillModeSolid);
-	//Novice::DrawSprite(pos_.x - radius_ * 2, pos_.y- radius_ * 2, playerdownright, 1, 1, 0, WHITE);
-	Novice::ScreenPrintf(0, 0, "jumoFlag : %d", radius_);
+	
+	Novice::ScreenPrintf(0, 0, "jumpFlag : %d", radius_);
 	Novice::ScreenPrintf(0, 20, "pos : [%d,%d]", pos_.x, pos_.y);
 	Novice::ScreenPrintf(0, 40, "SideLeftTop : [%d,%d]", sideVertex_.leftTop.x, sideVertex_.leftTop.y);
 	Novice::ScreenPrintf(0, 60, "SideLeftBotoom : [%d,%d]", sideVertex_.leftBottom.x, sideVertex_.leftBottom.y);
 	Novice::ScreenPrintf(0, 80, "SideRightTop : [%d,%d]", sideVertex_.rightTop.x, sideVertex_.rightTop.y);
 	Novice::ScreenPrintf(0, 100, "SideLeftBottom : [%d,%d]", sideVertex_.rightBottom.x, sideVertex_.rightBottom.y);
 
+	Novice::ScreenPrintf(0, 120, "%d", playerHp_);
+	
 	/*Novice::DrawEllipse(sideVertex_.leftTop.x, sideVertex_.leftTop.y, 2, 2, 0.0f, RED, kFillModeSolid);
 	Novice::DrawEllipse(sideVertex_.leftBottom.x, sideVertex_.leftBottom.y, 2, 2, 0.0f, RED, kFillModeSolid);
 	Novice::DrawEllipse(sideVertex_.rightBottom.x, sideVertex_.rightBottom.y, 2, 2, 0.0f, RED, kFillModeSolid);
@@ -136,9 +138,9 @@ void Player::Draw()
 #endif
 }
 
-void Player::Col(int x)
+void Player::Col()
 {
-	//mapflag_ = x;
+	color_ = RED;
 }
 
 void Player::SetHightpos(int Blocksize)
@@ -177,7 +179,7 @@ void Player::Fall()
 
 
 
-void Player::Oncollision(char* keys)
+void Player::Oncollision()
 {
 	if (parryFlag_ == 0) {
 		playerHp_ -= 1;

@@ -50,7 +50,7 @@ public:
 	/// mapˆø”ó‚¯æ‚è
 	/// </summary>
 	/// <param name="mapflag"></param>
-	void Col(int x);
+	void Col();
 
 	//playerÚ×
 	Vector2 GetPosition() { return pos_; }
@@ -69,7 +69,7 @@ public:
 	void Fall();
 
 	//“–‚½‚Á‚½‚ç
-	void Oncollision(char* keys);
+	void Oncollision();
 private:
 
 

@@ -22,7 +22,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	Map map;
 	enemy.Initialize();
 	player.Initialize();
-	enemy2.Initialize(200, 200);
+	enemy2.Initialize(160, 200);
 	map.Initialize();
 
 	// ウィンドウの×ボタンが押されるまでループ
@@ -69,6 +69,21 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 			player.SetHightpos(map.GetBlockSize());
 		}
 
+		if (map.GoalBottomCollision(player.GetHightVertex())) {
+			player.Col();
+		}
+
+		if (map.GoalLeftCollision(player.GetSideVertex())) {
+			player.Col();
+		}
+
+		if (map.GoalRightCollision(player.GetSideVertex())) {
+			player.Col();
+		}
+		
+		if (map.GoalTopCollision(player.GetHightVertex())) {
+			player.Col();
+		}
 
 		float dx = enemy2.GetPosition().x - player.GetPosition().x;
 		float dy = enemy2.GetPosition().y - player.GetPosition().y;
@@ -76,7 +91,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 		float d = dx * dx + dy * dy;
 		float dis = player.Getradius() + enemy2.Getradius();
 		if (d <= dis*dis) {
-			player.Oncollision(keys);
+			player.Oncollision();
 			enemy2.Oncollision();
 		}
 		if (d <= (dis * dis) + 400) {

@@ -3,7 +3,7 @@
 
 void Enemy::Initialize()
 {
-	pos_.x = 200;
+	pos_.x = 180;
 	pos_.y = 200;
 	radius_ = 10;
 	speedX_ = 5;
