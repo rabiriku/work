@@ -99,6 +99,8 @@ public:
 	 void KeyCange2(int y, int x, int v, int z,int a,int b);
 	 void KeyReturn(int x, int y, int v, int z);
 	 void KeyReturn2(int y, int x, int v, int z, int a, int b);
+	 void KeyReturn3(int y, int x, int v, int z, int a, int b);
+	 void KeyReturn4(int y, int x, int v, int z, int a, int b);
 	 void KeyCangeEfect(float x, float y);
 
 	 //‰¹

@@ -29,6 +29,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	int colorFlag = 0;
 	int title = Novice::LoadTexture("./resouces/images/title.png ");
 	int comprete= Novice::LoadTexture("./resouces/images/comprete.png ");
+	int bgm= Novice::LoadAudio("./resouces/audio/bgm.mp3");
 	enum scene {
 		TITLE,
 		GAME,
@@ -44,7 +45,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	enemy.Initialize(600,200);
 	enemy2.Initialize(160, 400);
 	map.Initialize();
-
+	Novice::PlayAudio(bgm, 1, 0.02);
 	// ウィンドウの×ボタンが押されるまでループ
 	while (Novice::ProcessMessage() == 0) {
 		// フレームの開始
@@ -54,6 +55,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 		memcpy(preKeys, keys, 256);
 		Novice::GetHitKeyStateAll(keys);
 
+		
 		///
 		/// ↓更新処理ここから
 		///
@@ -77,6 +79,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 			}
 			Novice::DrawSprite(0, 0, title, 1, 1, 0, WHITE);
 			Novice::DrawBox(0, 0, 1280, 800, 0, color, kFillModeSolid);
+			
 			break;
 
 		case GAME:
@@ -347,32 +350,32 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 					No = COMPLETE;
 					map.GoalAudio();
 					map.KeyReturn2(15, 1, 15, 2, 22, 34);
-					map.KeyReturn2(9, 33, 10, 33, 12, 3);
-					map.KeyReturn2(5, 25, 5, 26, 12, 36);
+					map.KeyReturn3(9, 33, 10, 33, 12, 3);
+					map.KeyReturn4(5, 25, 5, 26, 12, 36);
 				}
 
 				if (map.GoalLeftCollision3(player.GetSideVertex())) {
 					No = COMPLETE;
 					map.GoalAudio();
 					map.KeyReturn2(15, 1, 15, 2, 22, 34);
-					map.KeyReturn2(9, 33, 10, 33, 12, 3);
-					map.KeyReturn2(5, 25, 5, 26, 12, 36);
+					map.KeyReturn3(9, 33, 10, 33, 12, 3);
+					map.KeyReturn4(5, 25, 5, 26, 12, 36);
 				}
 
 				if (map.GoalRightCollision3(player.GetSideVertex())) {
 					No = COMPLETE;
 					map.GoalAudio();
 					map.KeyReturn2(15, 1, 15, 2, 22, 34);
-					map.KeyReturn2(9, 33, 10, 33, 12, 3);
-					map.KeyReturn2(5, 25, 5, 26, 12, 36);
+					map.KeyReturn3(9, 33, 10, 33, 12, 3);
+					map.KeyReturn4(5, 25, 5, 26, 12, 36);
 				}
 
 				if (map.GoalTopCollision3(player.GetHightVertex())) {
 					No = COMPLETE;
 					map.GoalAudio();
 					map.KeyReturn2(15, 1, 15, 2, 22, 34);
-					map.KeyReturn2(9, 33, 10, 33, 12, 3);
-					map.KeyReturn2(5, 25, 5, 26, 12, 36);
+					map.KeyReturn3(9, 33, 10, 33, 12, 3);
+					map.KeyReturn4(5, 25, 5, 26, 12, 36);
 				}
 
 				if (map.KeyBottomCollision3(player.GetHightVertex())) {
@@ -479,7 +482,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 			///
 			/// ↓描画処理ここから
 			///
-				
+				Novice::ScreenPrintf(0, 0, "%d", diffusionflag);
 				map.Draw3();
 				enemy.Draw();
 				enemy2.Draw();

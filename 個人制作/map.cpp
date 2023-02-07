@@ -847,6 +847,20 @@ void Map::KeyReturn2(int y, int x, int v, int z, int a, int b)
 	map3[a][b] = KEY;
 }
 
+void Map::KeyReturn3(int y, int x, int v, int z, int a, int b)
+{
+	map3[y][x] = LOCK;
+	map3[v][z] = LOCK;
+	map3[a][b] = KEY2;
+}
+
+void Map::KeyReturn4(int y, int x, int v, int z, int a, int b)
+{
+	map3[y][x] = LOCK;
+	map3[v][z] = LOCK;
+	map3[a][b] = KEY3;
+}
+
 void Map::KeyCangeEfect(float x, float y)
 {
 	if (dropflag_ == 1) {
