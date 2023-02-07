@@ -44,9 +44,6 @@
     <ClCompile Include="map.cpp">
       <Filter>KamataEngine</Filter>
     </ClCompile>
-    <ClCompile Include="bullet.cpp">
-      <Filter>KamataEngine</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="C:\KamataEngine\DirectXGame\audio\Audio.h">
@@ -126,9 +123,6 @@
     </ClInclude>
     <ClInclude Include="..\DirectXGame\math\Vector4.h">
       <Filter>KamataEngine\Include</Filter>
-    </ClInclude>
-    <ClInclude Include="bullet.h">
-      <Filter>KamataEngine\Hedder</Filter>
     </ClInclude>
     <ClInclude Include="map.h">
       <Filter>KamataEngine\Hedder</Filter>

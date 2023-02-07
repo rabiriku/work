@@ -16,7 +16,9 @@ public:
 	/// </summary>
 	void Draw();
 
-	
+	void Draw2();
+
+	void Draw3();
 	 //当たり判定頂点呼び出し
 	 void ColBottom(const Vertex &vertex);
 	 void ColTop(const Vertex& vertex);
@@ -28,17 +30,79 @@ public:
 	 int BlockLeftCollision(Vertex vertex);
 	 int BlockRightCollision(Vertex vertex);
 
+	 int BlockTopCollision2(Vertex vertex);
+	 int BlockBottomCollison2(Vertex vertex);
+	 int BlockLeftCollision2(Vertex vertex);
+	 int BlockRightCollision2(Vertex vertex);
+
+	 int BlockTopCollision3(Vertex vertex);
+	 int BlockBottomCollison3(Vertex vertex);
+	 int BlockLeftCollision3(Vertex vertex);
+	 int BlockRightCollision3(Vertex vertex);
+
 	 //GOALに当たっているか
+	 int GoalTopCollision2(Vertex vertex);
+	 int GoalBottomCollision2(Vertex vertex);
+	 int GoalLeftCollision2(Vertex vertex);
+	 int GoalRightCollision2(Vertex vertex);
+
 	 int GoalTopCollision(Vertex vertex);
 	 int GoalBottomCollision(Vertex vertex);
 	 int GoalLeftCollision(Vertex vertex);
 	 int GoalRightCollision(Vertex vertex);
+
+	 int GoalTopCollision3(Vertex vertex);
+	 int GoalBottomCollision3(Vertex vertex);
+	 int GoalLeftCollision3(Vertex vertex);
+	 int GoalRightCollision3(Vertex vertex);
+
+	 //KEYに当たっているか
+	 int KeyTopCollision(Vertex vertex);
+	 int KeyBottomCollision(Vertex vertex);
+	 int KeyLeftCollision(Vertex vertex);
+	 int KeyRightCollision(Vertex vertex);
+
+	 int KeyTopCollision3(Vertex vertex);
+	 int KeyBottomCollision3(Vertex vertex);
+	 int KeyLeftCollision3(Vertex vertex);
+	 int KeyRightCollision3(Vertex vertex);
 	 
+	 int KeyTopCollision5(Vertex vertex);
+	 int KeyBottomCollision5(Vertex vertex);
+	 int KeyLeftCollision5(Vertex vertex);
+	 int KeyRightCollision5(Vertex vertex);
+
+	 int KeyTopCollision6(Vertex vertex);
+	 int KeyBottomCollision6(Vertex vertex);
+	 int KeyLeftCollision6(Vertex vertex);
+	 int KeyRightCollision6(Vertex vertex);
+	 //LOCKに当たっているか
+	 int LockTopCollision(Vertex vertex);
+	 int LockBottomCollision(Vertex vertex);
+	 int LockLeftCollision(Vertex vertex);
+	 int LockRightCollision(Vertex vertex);
+
+	 int LockTopCollisio3(Vertex vertex);
+	 int LockBottomCollision3(Vertex vertex);
+	 int LockLeftCollision3(Vertex vertex);
+	 int LockRightCollision3(Vertex vertex);
 	 //マップ関連事項取得
 	 int GetmapcountX() { return mapCountX; }
 	 int GetmapcountY() { return mapCountY; }
-	 int GetmapFlag() { return mapFlag_; }
 	 int GetBlockSize() { return blockSize; }
+	 int GetKeyFlag() {
+		 return keyFlag_;
+	 }
+	 int GetEfectFlag() { return efectflag_; }
+	 //マップ変更ギミック
+	 void KeyChange(int x, int y, int v, int z);
+	 void KeyCange2(int y, int x, int v, int z,int a,int b);
+	 void KeyReturn(int x, int y, int v, int z);
+	 void KeyReturn2(int y, int x, int v, int z, int a, int b);
+	 void KeyCangeEfect(float x, float y);
+
+	 //音
+	 void GoalAudio();
 
 private:
 	int map1[25][40]{
@@ -69,6 +133,61 @@ private:
 		{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1}
 	};
 
+	int map2[25][40]{
+		{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
+		{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+		{1,0,0,3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,1},
+		{1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,4,1,1,1},
+		{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,0,0,1,0,0,0,0,1},
+		{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,1},
+		{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,0,0,0,0,0,0,0,0,1,0,0,0,0,0,1},
+		{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,1},
+		{1,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,1},
+		{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,1},
+		{1,0,0,0,0,0,0,0,0,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,1},
+		{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,1},
+		{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,1},
+		{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,1},
+		{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,1},
+		{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,1},
+		{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,1},
+		{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,0,0,1},
+		{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,1},
+		{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,1},
+		{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,1},
+		{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,1},
+		{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,1},
+		{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,2,0,0,0,1},
+		{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1}
+	};
+
+	int map3[25][40]{
+		{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
+		{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+		{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+		{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+		{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+		{1,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,4,4,1,0,0,0,0,0,0,0,0,0,0,0,1},
+		{1,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,2,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,1},
+		{1,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,1},
+		{1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1},
+		{1,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4,0,0,0,0,0,1},
+		{1,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4,0,0,0,0,0,1},
+		{1,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,1},
+		{1,0,0,5,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,6,0,0,1},
+		{1,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1},
+		{1,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+		{1,4,4,1,1,1,1,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+		{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,1},
+		{1,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+		{1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+		{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,0,0,1},
+		{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,1,0,0,1},
+		{1,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,1,0,1,1},
+		{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,3,0,1,0,0,1},
+		{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,1},
+		{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1}
+	};
 
 	int mapCountX = sizeof(map1[0]) / sizeof(map1[0][0]);
 	int mapCountY = sizeof(map1) / sizeof(map1[0]);
@@ -76,12 +195,24 @@ private:
 		NONE,
 		BLOCK,
 		GOAL,
+		KEY,
+		LOCK,
+		KEY2,
+		KEY3
 	};
 	int blockSize;
-	int mapFlag_;
-	int downMapFlag_;
+	int keyFlag_;
+
 	int  bg;
 	int bgbox;
+	int block_;
+	int lock_;
+	int key_;
+	int goal_;
+	int ball_;
+	int explanation_;
+	int keyaudio_;
+	int goalaudio_;
 
 	int posX_;
 	int posY_;
@@ -95,4 +226,9 @@ private:
 	int leftBottomX_;
 	int leftBottomY_;
 
+	float BulletposX[4];
+	float BulletposY[4];
+	int dropflag_;
+	int efectflag_;
+	float speed_;
 };

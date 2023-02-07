@@ -17,15 +17,14 @@ void Player::Initialize()
 	speedtmp_ = 5;
 	effectFlag_ = 0;
 	effectTime_ = 10;
-	playerHp_ = 5;
 	parryFlag_ = 0;
-	invincibleTime_ = 180;
+	playerdirection_ = 1;
 
 
-	playerright = Novice::LoadTexture("./resouces/player2.png");
-	playerdownright = Novice::LoadTexture("./resouces/player.png");
-	playerjamp1 = Novice::LoadTexture("./resouces/player4.png");
-	playerjamp2 = Novice::LoadTexture("./resouces/player5.png");
+	parryaudio_= Novice::LoadAudio("./resouces/audio/parry.mp3");
+	playerright_ = Novice::LoadTexture("./resouces/images/player.png");
+	playerleft_ = Novice::LoadTexture("./resouces/images/player1.png");
+	
 
 }
 
@@ -34,6 +33,7 @@ void Player::Parry(char* keys) {
 		effectFlag_ = 1;
 		parryFlag_ = 1;
 		isJump_ = 0;
+		Novice::PlayAudio(parryaudio_, 0, 1);
 		Sleep(160);
 	}
 }
@@ -78,9 +78,11 @@ void Player::Update(char* keys)
 {
 
 	if (keys[DIK_A] && pos_.x - radius_ > 32) {
+		playerdirection_ = 1;
 		pos_.x -= speed_.x;
 	}
 	if (keys[DIK_D]) {
+		playerdirection_ = 2;
 		pos_.x += speed_.x;
 	}
 	Jamp(keys);
@@ -102,46 +104,20 @@ void Player::Update(char* keys)
 
 }
 
-
-
 void Player::Draw()
 {
-
-	if (isJump_ == 1) {
-		Novice::DrawSprite(pos_.x - radius_, pos_.y - radius_, playerjamp2, 1, 1, 0, WHITE);
+	if (playerdirection_ == 1) {
+		Novice::DrawSprite(pos_.x - radius_, pos_.y - radius_, playerleft_, 1, 1, 0.0f, WHITE);
 	}
-	if (isJump_ == 2) {
-		Novice::DrawSprite(pos_.x - radius_, pos_.y - radius_, playerjamp1, 1, 1, 0, WHITE);
+	if (playerdirection_ == 2) {
+		Novice::DrawSprite(pos_.x - radius_, pos_.y - radius_, playerright_, 1, 1, 0.0f, WHITE);
 	}
 
 	if (effectFlag_ == 1) {
 		Novice::DrawBox(0, 0, 1280, 800, 0, 0xFFFFFF64, kFillModeSolid);
 	}
-#ifdef _DEBUG
-	Novice::DrawEllipse(pos_.x, pos_.y, radius_, radius_, 0.0f, color_, kFillModeSolid);
-	
-	Novice::ScreenPrintf(0, 0, "jumpFlag : %d", radius_);
-	Novice::ScreenPrintf(0, 20, "pos : [%d,%d]", pos_.x, pos_.y);
-	Novice::ScreenPrintf(0, 40, "SideLeftTop : [%d,%d]", sideVertex_.leftTop.x, sideVertex_.leftTop.y);
-	Novice::ScreenPrintf(0, 60, "SideLeftBotoom : [%d,%d]", sideVertex_.leftBottom.x, sideVertex_.leftBottom.y);
-	Novice::ScreenPrintf(0, 80, "SideRightTop : [%d,%d]", sideVertex_.rightTop.x, sideVertex_.rightTop.y);
-	Novice::ScreenPrintf(0, 100, "SideLeftBottom : [%d,%d]", sideVertex_.rightBottom.x, sideVertex_.rightBottom.y);
-
-	Novice::ScreenPrintf(0, 120, "%d", playerHp_);
-	
-	/*Novice::DrawEllipse(sideVertex_.leftTop.x, sideVertex_.leftTop.y, 2, 2, 0.0f, RED, kFillModeSolid);
-	Novice::DrawEllipse(sideVertex_.leftBottom.x, sideVertex_.leftBottom.y, 2, 2, 0.0f, RED, kFillModeSolid);
-	Novice::DrawEllipse(sideVertex_.rightBottom.x, sideVertex_.rightBottom.y, 2, 2, 0.0f, RED, kFillModeSolid);
-	Novice::DrawEllipse(sideVertex_.rightTop.x, sideVertex_.rightTop.y, 2, 2, 0.0f, RED, kFillModeSolid);*/
-
-
-#endif
 }
 
-void Player::Col()
-{
-	color_ = RED;
-}
 
 void Player::SetHightpos(int Blocksize)
 {
@@ -174,14 +150,5 @@ void Player::Fall()
 	if (!isJump_) {
 		isJump_ = true;
 		jumpSpeed_ = 0;
-	}
-}
-
-
-
-void Player::Oncollision()
-{
-	if (parryFlag_ == 0) {
-		playerHp_ -= 1;
 	}
 }

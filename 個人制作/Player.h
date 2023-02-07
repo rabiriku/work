@@ -68,8 +68,7 @@ public:
 	void SetRightPos(int Blocksize);
 	void Fall();
 
-	//当たったら
-	void Oncollision();
+	
 private:
 
 
@@ -88,21 +87,20 @@ private:
 	int jumpSpeed_;
 	int isJump_;
 
+	int playerdirection_;
+
 	int parryFlag_;
 	int invincibleTime_;
 
 	int effectFlag_;
 	int effectTime_;
 
-	int playerHp_;
-
-	int mapflag_;
-	int map1_;
 
 	// テクスチャ
-	int playerright;
-	int playerdownright;
-	int  playerjamp1;
-	int  playerjamp2;
+	int playerright_;
+	int playerleft_;
+	
+	//audio
+	int parryaudio_;
 
 };
