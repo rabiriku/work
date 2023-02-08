@@ -46,11 +46,6 @@ public:
 	/// •`‰æ
 	/// </summary>
 	void Draw();
-	/// <summary>
-	/// mapˆø”ó‚¯æ‚è
-	/// </summary>
-	/// <param name="mapflag"></param>
-	void Col();
 
 	//playerÚ×
 	Vector2 GetPosition() { return pos_; }

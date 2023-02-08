@@ -1,8 +1,8 @@
-#include "Enemy.h"
+#include "Ball.h"
 #include <Novice.h>
 
 
-void Enemy::Initialize(int x, int y)
+void Ball::Initialize(int x, int y)
 {
 	pos_.x = x;
 	pos_.y = y;
@@ -15,7 +15,7 @@ void Enemy::Initialize(int x, int y)
 
 
 
-void Enemy::Update()
+void Ball::Update()
 {
 	
 	pos_.x += speedX_;
@@ -29,13 +29,13 @@ void Enemy::Update()
 }
 
 
-void Enemy::Draw()
+void Ball::Draw()
 {
 	Novice::DrawSprite(pos_.x - radius_, pos_.y - radius_, enebub_, 1, 1, 0, 0xFFFFFFFF);
 }
 
 
-void Enemy::Nocollision()
+void Ball::Nocollision()
 {
 	color_ = WHITE;
 }

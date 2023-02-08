@@ -35,7 +35,7 @@
     <ClCompile Include="C:\KamataEngine\Adapter\Novice.cpp">
       <Filter>KamataEngine\Adapter</Filter>
     </ClCompile>
-    <ClCompile Include="Enemy.cpp">
+    <ClCompile Include="Ball.cpp">
       <Filter>KamataEngine</Filter>
     </ClCompile>
     <ClCompile Include="Player.cpp">
@@ -130,7 +130,7 @@
     <ClInclude Include="Player.h">
       <Filter>KamataEngine\Hedder</Filter>
     </ClInclude>
-    <ClInclude Include="Enemy.h">
+    <ClInclude Include="Ball.h">
       <Filter>KamataEngine\Hedder</Filter>
     </ClInclude>
   </ItemGroup>

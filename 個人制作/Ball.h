@@ -4,7 +4,7 @@
 /// <summary>
 /// “G
 /// </summary>
-class Enemy {
+class Ball {
 public:
 
 	void Initialize(int x, int y);

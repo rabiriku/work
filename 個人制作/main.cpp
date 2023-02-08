@@ -1,5 +1,5 @@
 ﻿#include <Novice.h>
-#include "Enemy.h"
+#include "Ball.h"
 #include"Player.h"
 #include"map.h"
 const char kWindowTitle[] = "Let's goal the way";
@@ -37,13 +37,13 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 		GAME3,
 		COMPLETE,
 	};
-	Enemy enemy;
-	Enemy enemy2;
+	Ball ball;
+	Ball ball2;
 	Player player;
 	Map map;
 	player.Initialize();
-	enemy.Initialize(600,200);
-	enemy2.Initialize(160, 400);
+	ball.Initialize(600,200);
+	ball2.Initialize(160, 400);
 	map.Initialize();
 	Novice::PlayAudio(bgm, 1, 0.02);
 	// ウィンドウの×ボタンが押されるまでループ
@@ -63,8 +63,8 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 		{
 		case TITLE:
 			player.Initialize();
-			enemy.Initialize(600, 200);
-			enemy2.Initialize(160, 400);
+			ball.Initialize(600, 200);
+			ball2.Initialize(160, 400);
 			map.Initialize();
 			if (keys[DIK_SPACE]) {
 				colorFlag = 1;
@@ -85,12 +85,9 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 		case GAME:
 			player.Update(keys);
 
-			enemy.Update();
-			enemy2.Update();
+			ball.Update();
+			ball2.Update();
 
-			//map.Colplayer(player.GetPosition(), player.Getradius());
-			//map.ColBottom(player.GetVertex());
-			//map.ColTop(player.GetVertex());
 
 
 			// 当たっていたら1 当たってなかったら0
@@ -117,8 +114,8 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 			if (map.GoalBottomCollision(player.GetHightVertex())) {
 				No = GAME2;
 				player.Initialize();
-				enemy.Initialize(270, 200);
-				enemy2.Initialize(170, 200);
+				ball.Initialize(270, 200);
+				ball2.Initialize(170, 200);
 				map.Initialize();
 				map.GoalAudio();
 			}
@@ -126,8 +123,8 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 			if (map.GoalLeftCollision(player.GetSideVertex())) {
 				No = GAME2;
 				player.Initialize();
-				enemy.Initialize(220, 200);
-				enemy2.Initialize(150, 200);
+				ball.Initialize(220, 200);
+				ball2.Initialize(150, 200);
 				map.Initialize();
 				map.GoalAudio();
 			}
@@ -135,8 +132,8 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 			if (map.GoalRightCollision(player.GetSideVertex())) {
 				No = GAME2;
 				player.Initialize();
-				enemy.Initialize(220, 200);
-				enemy2.Initialize(150, 200);
+				ball.Initialize(220, 200);
+				ball2.Initialize(150, 200);
 				map.Initialize();
 				map.GoalAudio();
 			}
@@ -144,27 +141,27 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 			if (map.GoalTopCollision(player.GetHightVertex())) {
 				No = GAME2;
 				player.Initialize();
-				enemy.Initialize(220, 200);
-				enemy2.Initialize(150, 200);
+				ball.Initialize(220, 200);
+				ball2.Initialize(150, 200);
 				map.Initialize();
 				map.GoalAudio();
 			}
 
-			 dx = enemy2.GetPosition().x - player.GetPosition().x;
-			 dy = enemy2.GetPosition().y - player.GetPosition().y;
+			 dx = ball2.GetPosition().x - player.GetPosition().x;
+			 dy = ball2.GetPosition().y - player.GetPosition().y;
 
 			 d = dx * dx + dy * dy;
-			 dis = player.Getradius() + enemy2.Getradius();
+			 dis = player.Getradius() + ball2.Getradius();
 			if (d <= (dis * dis) + 400) {
 				player.Parry(keys);
 
 			}
 
-			 dx2 = enemy.GetPosition().x - player.GetPosition().x;
-			 dy2 = enemy.GetPosition().y - player.GetPosition().y;
+			 dx2 = ball.GetPosition().x - player.GetPosition().x;
+			 dy2 = ball.GetPosition().y - player.GetPosition().y;
 
 			 d2 = dx2 * dx2 + dy2 * dy2;
-			 dis2 = player.Getradius() + enemy2.Getradius();
+			 dis2 = player.Getradius() + ball2.Getradius();
 			if (d2 <= (dis2 * dis2) + 400) {
 				player.Parry(keys);
 
@@ -178,8 +175,8 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 			///
 			//enemy.Draw();
 			map.Draw();
-			enemy.Draw();
-			enemy2.Draw();
+			ball.Draw();
+			ball2.Draw();
 			player.Draw();
 
 			//Novice::ScreenPrintf(0, 40, "%f", dis*dis);
@@ -193,8 +190,8 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 			/// ↓更新処理ここから
 			///
 			player.Update(keys);
-			enemy.Update();
-			enemy2.Update();
+			ball.Update();
+			ball2.Update();
 
 			// 当たっていたら1 当たってなかったら0
 			if (map.BlockBottomCollison2(player.GetHightVertex()) || map.LockBottomCollision(player.GetHightVertex())) {
@@ -216,10 +213,11 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 				player.SetRightPos(map.GetBlockSize());
 			}
 
+
 			if (map.GoalBottomCollision2(player.GetHightVertex())) {
 				player.Initialize();
-				enemy.Initialize(160, 200);
-				enemy2.Initialize(1030, 200);
+				ball.Initialize(160, 200);
+				ball2.Initialize(1030, 200);
 				map.KeyReturn(3, 36, 2, 3);
 				map.GoalAudio();
 				No = GAME3;
@@ -227,8 +225,8 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 
 			if (map.GoalLeftCollision2(player.GetSideVertex())) {
 				player.Initialize();
-				enemy.Initialize(160, 200);
-				enemy2.Initialize(1030, 200);
+				ball.Initialize(160, 200);
+				ball2.Initialize(1030, 200);
 				map.KeyReturn(3, 36, 2, 3);
 				map.GoalAudio();
 				No = GAME3;
@@ -236,8 +234,8 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 
 			if (map.GoalRightCollision2(player.GetSideVertex())) {
 				player.Initialize();
-				enemy.Initialize(160, 200);
-				enemy2.Initialize(1030, 200);
+				ball.Initialize(160, 200);
+				ball2.Initialize(1030, 200);
 				map.KeyReturn(3, 36, 2, 3);
 				map.GoalAudio();
 				No = GAME3;
@@ -245,8 +243,8 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 
 			if (map.GoalTopCollision2(player.GetHightVertex())) {
 				player.Initialize();
-				enemy.Initialize(160, 200);
-				enemy2.Initialize(1030, 200);
+				ball.Initialize(160, 200);
+				ball2.Initialize(1030, 200);
 				map.KeyReturn(3, 36, 2, 3);
 				map.GoalAudio();
 				No = GAME3;
@@ -279,22 +277,22 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 				}
 			}
 
-			 dx = enemy2.GetPosition().x - player.GetPosition().x;
-			 dy = enemy2.GetPosition().y - player.GetPosition().y;
+			 dx = ball2.GetPosition().x - player.GetPosition().x;
+			 dy = ball2.GetPosition().y - player.GetPosition().y;
 
 			 d = dx * dx + dy * dy;
-			 dis = player.Getradius() + enemy2.Getradius();
+			 dis = player.Getradius() + ball2.Getradius();
 			
 			if (d <= (dis * dis) + 400) {
 				player.Parry(keys);
 
 			}
 
-			 dx2 = enemy.GetPosition().x - player.GetPosition().x;
-			 dy2 = enemy.GetPosition().y - player.GetPosition().y;
+			 dx2 = ball.GetPosition().x - player.GetPosition().x;
+			 dy2 = ball.GetPosition().y - player.GetPosition().y;
 
 			 d2 = dx2 * dx2 + dy2 * dy2;
-			 dis2 = player.Getradius() + enemy2.Getradius();
+			 dis2 = player.Getradius() + ball2.Getradius();
 
 			if (d2 <= (dis2 * dis2) + 400) {
 				player.Parry(keys);
@@ -307,8 +305,8 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 			/// ↓描画処理ここから
 			///
 			map.Draw2();
-			enemy.Draw();
-			enemy2.Draw();
+			ball.Draw();
+			ball2.Draw();
 			player.Draw();
 
 			
@@ -323,8 +321,8 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 			///
 				player.Update(keys);
 
-				enemy.Update();
-				enemy2.Update();
+				ball.Update();
+				ball2.Update();
 
 				if (map.BlockBottomCollison3(player.GetHightVertex())||map.LockBottomCollision3(player.GetHightVertex())) {
 					player.SetUnderPos(map.GetBlockSize());
@@ -455,22 +453,22 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 							diffusionflag = 0;
 						}
 					}
-				dx = enemy2.GetPosition().x - player.GetPosition().x;
-				dy = enemy2.GetPosition().y - player.GetPosition().y;
+				dx = ball2.GetPosition().x - player.GetPosition().x;
+				dy = ball2.GetPosition().y - player.GetPosition().y;
 
 				d = dx * dx + dy * dy;
-				dis = player.Getradius() + enemy2.Getradius();
+				dis = player.Getradius() + ball2.Getradius();
 				
 				if (d <= (dis * dis) + 400) {
 					player.Parry(keys);
 
 				}
 
-				dx2 = enemy.GetPosition().x - player.GetPosition().x;
-				dy2 = enemy.GetPosition().y - player.GetPosition().y;
+				dx2 = ball.GetPosition().x - player.GetPosition().x;
+				dy2 = ball.GetPosition().y - player.GetPosition().y;
 
 				d2 = dx2 * dx2 + dy2 * dy2;
-				dis2 = player.Getradius() + enemy2.Getradius();
+				dis2 = player.Getradius() + ball2.Getradius();
 				
 				if (d2 <= (dis2 * dis2) + 400) {
 					player.Parry(keys);
@@ -484,8 +482,8 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 			///
 				Novice::ScreenPrintf(0, 0, "%d", diffusionflag);
 				map.Draw3();
-				enemy.Draw();
-				enemy2.Draw();
+				ball.Draw();
+				ball2.Draw();
 				player.Draw();
 			/// 
 			/// ↑描画処理ここから
