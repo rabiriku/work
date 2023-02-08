@@ -2,7 +2,7 @@
 #include"Player.h"
 
 /// <summary>
-/// 敵
+/// ボール
 /// </summary>
 class Ball {
 public:
@@ -12,8 +12,6 @@ public:
 	void Update();
 
 	void Draw();
-
-	void Nocollision();
 
 	//アクセッサ
 	Vector2 GetPosition() { return pos_; }
@@ -26,7 +24,6 @@ private:
 
 
 	int radius_;
-	unsigned int color_;
 	int speedX_;
 	int speedY_;
 

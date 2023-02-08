@@ -9,7 +9,6 @@ void Ball::Initialize(int x, int y)
 	radius_ = 10;
 	speedX_ = 0;
 	speedY_ = 5;
-	color_ = WHITE;
 	enebub_ = Novice::LoadTexture("./resouces/images/ene.png");
 }
 
@@ -32,10 +31,4 @@ void Ball::Update()
 void Ball::Draw()
 {
 	Novice::DrawSprite(pos_.x - radius_, pos_.y - radius_, enebub_, 1, 1, 0, 0xFFFFFFFF);
-}
-
-
-void Ball::Nocollision()
-{
-	color_ = WHITE;
 }

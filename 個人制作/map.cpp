@@ -819,6 +819,7 @@ int Map::LockRightCollision3(Vertex vertex)
 	return 0;
 }
 //<<<<<<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>>>>>>>>
+//マップチェンジ
 void Map::KeyChange(int x, int y, int v, int z)
 {
 	map2[x][y] = NONE;
@@ -860,7 +861,7 @@ void Map::KeyReturn4(int y, int x, int v, int z, int a, int b)
 	map3[v][z] = LOCK;
 	map3[a][b] = KEY3;
 }
-
+//エフェクト
 void Map::KeyCangeEfect(float x, float y)
 {
 	if (dropflag_ == 1) {
@@ -893,12 +894,13 @@ void Map::KeyCangeEfect(float x, float y)
 		efectflag_ = 0;
 	}
 }
-
+//音
 void Map::GoalAudio()
 {
 	Novice::PlayAudio(goalaudio_, 0, 1);
 }
 
+//テクスチャ
 void Map::Draw() {
 
 	Novice::DrawSprite(0, 0, bg, 1, 1, 0, WHITE);

@@ -91,6 +91,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 
 
 			// 当たっていたら1 当たってなかったら0
+			//当たり判定
 			if (map.BlockBottomCollison(player.GetHightVertex())) {
 				player.SetUnderPos(map.GetBlockSize());
 			}
@@ -194,6 +195,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 			ball2.Update();
 
 			// 当たっていたら1 当たってなかったら0
+			//当たり判定
 			if (map.BlockBottomCollison2(player.GetHightVertex()) || map.LockBottomCollision(player.GetHightVertex())) {
 				player.SetUnderPos(map.GetBlockSize());
 			}
@@ -324,6 +326,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 				ball.Update();
 				ball2.Update();
 
+				//当たり判定
 				if (map.BlockBottomCollison3(player.GetHightVertex())||map.LockBottomCollision3(player.GetHightVertex())) {
 					player.SetUnderPos(map.GetBlockSize());
 				}
