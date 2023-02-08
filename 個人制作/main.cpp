@@ -2,7 +2,7 @@
 #include "Enemy.h"
 #include"Player.h"
 #include"map.h"
-const char kWindowTitle[] = "GC1A_03_ウエダリクト_タイトル";
+const char kWindowTitle[] = "GC1A_03_Let's goal the way";
 
 // Windowsアプリでのエントリーポイント(main関数)
 int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
